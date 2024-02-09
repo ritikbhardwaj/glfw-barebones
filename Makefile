@@ -8,6 +8,9 @@ SRC_PATH := src
 INCLUDE_PATH := include
 LIB_PATH := lib
 
+#warnings
+WFLAGS := -Wall -Wextra -Wpedantic -Wold-style-cast -Wzero-as-null-pointer-constant -Wunused
+
 # Compile
 CXXFLAGS := -g -I $(INCLUDE_PATH) -std=c++11 -stdlib=libc++
 COBJFLAGS :=
@@ -36,7 +39,7 @@ default: makedir all
 
 # non-phony targets
 $(TARGET): $(OBJ)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJ) $(LDLIBS)
+	$(CXX) $(LDFLAGS) $(WFLAGS) -o $@ $(OBJ) $(LDLIBS)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.cpp
 	$(CXX) $(CXXFLAGS) $(COBJFLAGS) -c -o $@ $<
